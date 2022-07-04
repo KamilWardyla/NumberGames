@@ -1,5 +1,6 @@
 import random
 
+
 def salon_gier(computer_points=0, user_points=0):
     while True:
         enter = input("Press enter to roll a dice")
