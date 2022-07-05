@@ -1,40 +1,39 @@
-from flask import Flask
-from flask import request
+"""Warsztat: Gra w zgadywanie liczb 3
+Zaimplementuj odwróconą grę w zgadywanie liczb w aplikacji webowej przy pomocy frameworka Flask. Użytkownik dostaje do dyspozycji formularz z trzema guzikami: To small, To big, You win.
+
+Informacje o aktualnych zmiennych min i max przechowuj w ukrytych polach formularza (pole typu hidden).
+
+Uwaga – nie jest to rozwiązanie bezpieczne, bo użytkownik może ręcznie zmienić tego htmla, np. przy pomocy Firebuga. W tej sytuacji jednak zupełnie wystarczające. Najwyżej zepsuje sobie zabawę ;)"""
+
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
-
-@app.route("/", methods=["GET"])
-def get_guess_the_number():
-    return """
-        <label> Imagine a number between 0 and 1000!
-        <form action=/ method="POST"
-            Imagine a number between 0 and 1000! <br/>
-            <input type='hidden' name='big' value='1000'>
-            <input type='hidden' name='small' value='0'>
-            <button name="Choice" value="To small" id='to_small'> To small</button>
-            <button name="Choice" value="To Big" id='to_big'> To Big</button>
-            <button name="Choice" value="You win" id='you_win'> You win</button>
-            <br/>
-        </label>
-        </form> 
-    """
+BIG = 1000
+SMALL = 0
 
 
-@app.route("/", methods=["POST"])
-def guess_the_number_2(big=1000, small=0, guess_number=0):
-    guess_number = int((big - small) / 2 + small)
+def guess(big=1000, small=0, guess_number=0):
+    return int((big - small) / 2 + small)
+
+
+GUESS_NUMBER = guess()
+
+
+@app.route("/", methods=["GET", "POST"])
+def guess_the_number_2():
+    global GUESS_NUMBER, BIG, SMALL
     if request.form.get("Choice") == "To small":
-        small = guess_number
-        print(f"small number: {small}")
-        guess_number = int((big - small) / 2 + small)
-        return format(guess_number)
+        small = GUESS_NUMBER
+        GUESS_NUMBER = int((BIG - small) / 2 + small)
+        msg = "Number is too small"
     elif request.form.get("Choice") == "To Big":
-        big = guess_number
-        guess_number = int((big - small) / 2 + small)
-        return format(guess_number)
+        big = GUESS_NUMBER
+        GUESS_NUMBER = int((big - SMALL) / 2 + SMALL)
+        msg = "Number is too big"
     elif request.form.get("Choice") == "You win":
-        return "You win!"
+        return render_template("win.html", number=GUESS_NUMBER)
+    return render_template("index.html", number=GUESS_NUMBER)
 
 
 if __name__ == "__main__":
