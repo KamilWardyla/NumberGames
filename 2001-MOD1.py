@@ -1,11 +1,9 @@
 import random
 
 
-def salon_gier(computer_points=0, user_points=0):
-    # Zmienne
+def play_2001(computer_points=0, user_points=0):
     while True:
         try:
-            global cube1, cube2
             cube1 = input("Chose the first cube type(Dy): ")
             cube2 = input("Chose the second cube type(Dy): ")
             dice_type = [3, 4, 6, 8, 10, 12, 20, 100]
@@ -15,16 +13,13 @@ def salon_gier(computer_points=0, user_points=0):
             dice_range_cube2 = int(dice_range_cube2)
             user_dice_range_cube1 = int(dice_range_cube1)
             user_dice_range_cube2 = int(dice_range_cube2)
-            global computer_range_cube1
             computer_range_cube1 = random.choice(dice_type)
-            global computer_range_cube2
             computer_range_cube2 = random.choice(dice_type)
             if dice_range_cube1 and dice_range_cube2 not in dice_type:
                 raise Exception("There is not such cube")
         except Exception as e:
             print(e)
             continue
-        # Obliczenia
         throw1_computer = random.randint(1, computer_range_cube1)
         print(throw1_computer)
         throw2_computer = random.randint(1, computer_range_cube2)
@@ -57,4 +52,4 @@ def salon_gier(computer_points=0, user_points=0):
             return "User Wins"
 
 
-print(salon_gier())
+print(play_2001())

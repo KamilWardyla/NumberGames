@@ -1,6 +1,3 @@
-import random
-
-
 def guess_the_number_2(big=1000, small=0, guess_number=0):
     print("Imagine a number between 0 and 1000!")
     i = 1
@@ -24,10 +21,10 @@ def guess_the_number_2(big=1000, small=0, guess_number=0):
                 return "You win!"
             else:
                 raise Exception("""You have entered a wrong value, enter:
-too small <- if number is too small
-too big <- if number is too big
-you win <- if computer guessed the number
-                 """)
+                                too small <- if number is too small
+                                too big <- if number is too big
+                                you win <- if computer guessed the number
+                                """)
             if i > 10:
                 print("Nie oszukuj!")
                 continue

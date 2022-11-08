@@ -12,9 +12,6 @@ def guess_the_number_2(big=1000, small=0, guess_number=random.randrange(0, 1000)
         print(f"Your number is {guess_number}")
         ans = input("")
         last_number = guess_number
-        #print(f"last number: {last_number}")
-        #print(f"small number: {small}")
-        #print(f"big number: {big}")
 
         try:
             if ans == "too small":

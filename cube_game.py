@@ -10,15 +10,13 @@ class DiceRangeError(Exception):
     pass
 
 
-"""
-x - liczba rzutów kostką
-y - rodzaj kostki
-z - opcjonalny modifikator
-"""
-
-
 def check_dice_equation():
-    code = input("Podaj ciąg znaków opisujący rzut, format(xDy+Z): ")
+    print("""
+x - number of throws 
+y - cube type
+z - optional modificator
+""")
+    code = input("Enter cube code, format(xDy+Z): ")
     global OPERATION, DICE_THROW, DICE_RANGE, Z
     index_of_operation = 0
     operation_list = ["+", "-"]
@@ -55,7 +53,7 @@ def dice_game():
             check_dice_equation()
             return throw_types[str(OPERATION)]()
         except DiceRangeError:
-            print("Podaj poprawny kod")
+            print("Enter the correct cube code")
 
 
 def throw_dice():
